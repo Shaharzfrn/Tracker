@@ -1,0 +1,16 @@
+.container-sidebar {
+	width: 250px !important;
+	height: 100%;
+
+	position: fixed;
+	left: 0px;
+
+	border-right: 1px solid #AAA;
+}
+
+.sidebar-jumbotron-head {
+	width: 100% !important;
+
+	border-bottom: 1px solid #AAA;
+}
+

@@ -1,0 +1,82 @@
+
+{% load staticfiles %}
+{% block content %}
+
+<script type="text/javascript">
+
+
+  $(document).ready(function() {
+    
+    var path = window.location.pathname;
+    var links = document.getElementsByClassName('navbar-link-top');
+
+    for (var x = 0; x < links.length; x++) {
+      var link = links[x];
+
+      if (path == link.getAttribute('href'))
+        link.classList.toggle('active')
+      else
+        link.classList.remove('active');
+    }
+  });
+
+  $(document).on('click', '#sidebar-toggle', function (event){
+    document.getElementById('sidebar-toggle').classList.toggle('active')
+    // TODO: add sidebar toggle
+  });
+</script>
+
+<nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar bg-dark sticky-top ">
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">Tracker</a> 
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <button type="button" id="sidebar-toggle" class="navbar-btn btn-sidebar-toggle bg-dark">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link navbar-link-top" href="/tasks/"> My Tasks </a>
+      </li>
+      <div class="navbar-nav flex-row ml-md-auto ml-sm-auto d-block d-sm-none d-none d-sm-block d-md-none">
+        <ul class="navbar-nav ml-auto" >
+          <div class="navbar-nav" style="margin-left: 30px;">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item" >
+              <img src="{% static img %}" class="rounded-circle" width="35px" height="35px"/>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link navbar-link-top" href="#" id="asd">Login </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navbar-link-top" href="#">Sing up </a>
+            </li>
+            {% endif %}  
+          </div>
+        </ul>  
+      </div>
+    </ul>
+  </div>
+
+  <div class=" flex-row ml-md-auto d-none d-md-flex">
+    <ul class="navbar-nav">
+      {% if request.user.is_authenticated %}
+      <li class="nav-item">
+        <img src="{% static img %}" class="rounded-circle" width="35px" height="35px"/>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link navbar-link-top" href="#" id="asd">Login </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link navbar-link-top" href="#"">Sing up </a>
+      </li>
+      {% endif %}  
+    </ul>
+  </div>
+</nav>
+
+{% endblock %}
